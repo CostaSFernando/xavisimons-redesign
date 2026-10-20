@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Xavi Simons</title>
+<meta name="description" content="Xavi Simons — attacking midfielder, number 7 for Tottenham Hotspur and the Netherlands.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#0b0b0c;
+  --ground-2:#151517;
+  --ink:#f3f0e9;
+  --ink-2:#a9a59c;
+  --accent:#ff6a00;        /* Oranje */
+  --pitch:#103a2a;
+  --pitch-2:#144633;
+  --chalk:rgba(243,240,233,.82);
+  --m:clamp(16px,3vw,40px);
+  --gap:clamp(120px,16vw,220px);
+  --ease:cubic-bezier(.2,.7,.1,1);
+  --font:"Archivo",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--ground);color:var(--ink);font:400 18px/1.55 var(--font);font-variation-settings:"wdth" 100;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+::selection{background:var(--accent);color:var(--ground)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+.display{font-weight:850;font-variation-settings:"wdth" 62;text-transform:uppercase;letter-spacing:-.02em;line-height:.86}
+h2.display{font-size:clamp(56px,9vw,150px)}
+.wrap{padding-inline:var(--m)}
+.lead{font-size:clamp(19px,1.6vw,23px);line-height:1.45;max-width:36ch}
+
+/* ---------- Nav ---------- */
+.nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px var(--m);transition:background .4s var(--ease),transform .5s var(--ease)}
+.nav.solid{background:var(--ground)}
+.nav.hide{transform:translateY(-100%)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:800;font-variation-settings:"wdth" 70;text-transform:uppercase;font-size:20px;letter-spacing:.01em}
+.brand svg{width:30px;height:30px}
+.nav ul{display:flex;gap:28px;list-style:none}
+.nav ul a{text-decoration:none;font-size:16px;position:relative;padding:4px 0}
+.nav ul a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav ul a:hover::after,.nav ul a:focus-visible::after{transform:scaleX(1)}
+.btn{display:inline-flex;align-items:center;gap:12px;background:var(--accent);color:#120a02;text-decoration:none;font-weight:700;font-size:17px;padding:16px 26px;border-radius:999px;border:0;cursor:pointer;transition:transform .25s var(--ease),background .25s}
+.btn:hover{transform:translateY(-2px);background:#ff7d1f}
+.btn:active{transform:translateY(1px) scale(.98)}
+.btn .ball{width:20px;height:20px;transition:transform .6s var(--ease)}
+.btn:hover .ball{transform:translateX(4px) rotate(240deg)}
+.btn.small{padding:10px 18px;font-size:15px}
+.progress-ball{position:fixed;left:0;bottom:14px;z-index:49;width:22px;height:22px;pointer-events:none;will-change:transform}
+@media (max-width:860px){.nav ul{display:none}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:100svh;display:grid;grid-template-columns:1.05fr 1fr;align-items:end;padding:120px var(--m) 0;overflow:hidden;isolation:isolate}
+.hero-pitch{position:absolute;inset:0;z-index:-2;width:100%;height:100%}
+.hero-pitch path,.hero-pitch circle,.hero-pitch rect{fill:none;stroke:rgba(243,240,233,.13);stroke-width:2;vector-effect:non-scaling-stroke}
+.hero-copy{padding-bottom:clamp(120px,15vh,190px);position:relative;z-index:2}
+.hero h1{font-size:clamp(84px,15.5vw,260px);margin-left:-.04em}
+.hero h1 span{display:block;overflow:hidden}
+.hero h1 span i{display:block;font-style:normal}
+.hero .lead{margin-top:40px}
+.hero-actions{display:flex;gap:22px;align-items:center;margin-top:36px;flex-wrap:wrap}
+.hero-actions .text-link{font-size:17px;text-underline-offset:6px}
+.hero-photo{position:relative;align-self:stretch;margin-right:calc(var(--m) * -1);z-index:1}
+.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:45% 30%;transform-origin:50% 60%}
+.hero-seven{position:absolute;right:4%;top:10%;font-size:clamp(160px,26vw,420px);color:var(--accent);z-index:2;line-height:.8}
+.hero-meta{position:absolute;left:var(--m);right:var(--m);bottom:96px;display:flex;justify-content:space-between;font-size:15px;color:var(--ink-2);z-index:3}
+
+/* ---------- LED perimeter board ---------- */
+.led{position:relative;background:#050505;overflow:hidden;padding:18px 0;border-block:6px solid #1a1a1c}
+.led-track{display:flex;width:max-content;align-items:center;gap:56px;will-change:transform}
+.led-item{display:flex;align-items:center;gap:56px;font-weight:850;font-variation-settings:"wdth" 62;text-transform:uppercase;font-size:clamp(30px,3.6vw,52px);letter-spacing:.02em;color:var(--accent);white-space:nowrap}
+.led-item .dot{width:12px;height:12px;border-radius:50%;background:var(--ink)}
+.led-logo{height:clamp(34px,4vw,54px);width:auto;filter:brightness(0) invert(1);opacity:.92}
+.led-logo.knvb{height:clamp(40px,4.6vw,62px)}
+
+/* ---------- Statement ---------- */
+.statement{padding:var(--gap) var(--m) 0;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end}
+.statement h2{grid-column:1/8}
+.statement .lead{grid-column:1/7;margin-top:40px}
+.statement figure{grid-column:8/13;grid-row:1/3;aspect-ratio:4/5;overflow:hidden}
+.statement figure img{width:100%;height:100%;object-fit:cover}
+
+/* ---------- Journey (pinned passing move) ---------- */
+.journey{position:relative;margin-top:var(--gap);background:var(--pitch);height:calc(var(--stops) * 85vh + 100vh)}
+.journey-stage{position:sticky;top:0;height:100svh;display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:auto 1fr;gap:0 clamp(24px,4vw,64px);padding:96px var(--m) 40px;overflow:hidden}
+.journey-head{grid-column:1/3;display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:24px}
+.journey-head h2{font-size:clamp(48px,7vw,112px)}
+.journey-head p{max-width:34ch;color:var(--ink);font-size:17px}
+.pitch{width:100%;height:100%;min-height:0;align-self:center}
+.pitch .line{fill:none;stroke:var(--chalk);stroke-width:3}
+.pitch .stripe{fill:var(--pitch-2)}
+.pitch .pass{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-dasharray:1 14}
+.pitch .pass-done{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round}
+.pitch .stop{cursor:pointer}
+.pitch .stop circle.p{fill:var(--pitch);stroke:var(--ink);stroke-width:3;transition:fill .3s, r .3s}
+.pitch .stop.on circle.p{fill:var(--accent);stroke:var(--accent)}
+.pitch .stop text{fill:var(--ink);font:700 22px var(--font);font-variation-settings:"wdth" 75;text-transform:uppercase}
+.pitch .stop:hover circle.p,.pitch .stop:focus-visible circle.p{fill:var(--ink)}
+.chapter{position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto;gap:24px;min-height:0}
+.chapter-photo{position:relative;overflow:hidden;background:var(--pitch-2);min-height:0}
+.chapter-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity .7s var(--ease),transform 1.2s var(--ease)}
+.chapter-photo img.on{opacity:1;transform:scale(1)}
+.chapter-photo .typecard{position:absolute;inset:0;display:grid;place-items:center;background:#0d2a52;color:var(--ink);opacity:0;transition:opacity .7s var(--ease)}
+.chapter-photo .typecard.on{opacity:1}
+.chapter-photo .typecard b{font-weight:900;font-variation-settings:"wdth" 62;font-size:clamp(90px,12vw,200px);line-height:.8}
+.chapter-text{min-height:150px}
+.chapter-text .when{font-size:17px;color:var(--accent);font-weight:700}
+.chapter-text h3{font-size:clamp(34px,3.6vw,56px);margin:6px 0 10px}
+.chapter-text p{max-width:42ch}
+.chapter-text > *{transition:opacity .35s, transform .45s var(--ease)}
+.chapter-text.swap > *{opacity:0;transform:translateY(14px)}
+
+/* ---------- Honours (scoreboard on Oranje) ---------- */
+.honours{background:var(--accent);color:#140b03;padding:var(--gap) var(--m)}
+.honours-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:start}
+.honours h2{grid-column:1/13;margin-bottom:clamp(48px,6vw,96px)}
+.caps{grid-column:1/6}
+.caps .num{font-weight:900;font-variation-settings:"wdth" 62;font-size:clamp(150px,22vw,360px);line-height:.8;letter-spacing:-.03em;display:flex}
+.caps .num span{display:inline-block}
+.caps p{font-size:clamp(20px,1.8vw,26px);margin-top:20px;font-weight:600;max-width:20ch}
+.trophies{grid-column:7/13;list-style:none}
+.trophies li{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline;padding:20px 0}
+.trophies li:nth-child(odd){background:rgba(20,11,3,.07);padding-inline:18px;margin-inline:-18px}
+.trophies b{font-weight:800;font-variation-settings:"wdth" 75;text-transform:uppercase;font-size:clamp(24px,2.4vw,36px);line-height:1}
+.trophies span{font-size:17px;font-weight:600;text-align:right}
+.trophies small{display:block;font-size:16px;font-weight:500;margin-top:6px}
+
+/* ---------- Beyond ---------- */
+.beyond{padding:var(--gap) 0 0}
+.beyond-head{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-inline:var(--m);align-items:end}
+.beyond-head h2{grid-column:1/8}
+.beyond-head .lead{grid-column:8/13}
+.months{margin-top:clamp(56px,7vw,100px);display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-inline:var(--m)}
+.month{position:relative}
+.month figure{overflow:hidden;background:var(--ground-2)}
+.month img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.month:hover img{transform:scale(1.04)}
+.month h3{font-weight:800;font-variation-settings:"wdth" 70;text-transform:uppercase;font-size:clamp(26px,2.6vw,40px);line-height:.95;margin-top:18px;max-width:18ch}
+.month p{color:var(--ink-2);font-size:16px;margin-top:6px}
+.m1{grid-column:1/6}.m1 figure{aspect-ratio:4/5}
+.m2{grid-column:7/10;margin-top:18vw}.m2 figure{aspect-ratio:3/4}
+.m3{grid-column:10/13;margin-top:6vw}.m3 figure{aspect-ratio:2/3}
+.m4{grid-column:2/6;margin-top:6vw}.m4 figure{aspect-ratio:3/4}
+.m5{grid-column:7/13;margin-top:-4vw}.m5 figure{aspect-ratio:16/10}
+.m6{grid-column:1/13}
+
+/* ---------- Partners ---------- */
+.partners{margin-top:calc(var(--gap) * .7);padding:var(--gap) var(--m);background:var(--ground-2)}
+.partners-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:start}
+.partners h2{grid-column:1/6;grid-row:1;font-size:clamp(48px,6vw,96px)}
+.partners .lead{grid-column:1/6;grid-row:2;align-self:start;margin-top:28px;color:var(--ink)}
+.partner-list{grid-column:7/13;grid-row:1/4;display:grid;gap:24px}
+.partner{position:relative;display:grid;grid-template-columns:1fr 1.1fr;min-height:260px;background:var(--ground);overflow:hidden;text-decoration:none}
+.partner figure{position:relative;overflow:hidden}
+.partner figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);transition:filter .6s var(--ease),transform 1s var(--ease)}
+.partner:hover figure img,.partner:focus-visible figure img{filter:none;transform:scale(1.04)}
+.partner .body{padding:28px;display:flex;flex-direction:column;justify-content:space-between;gap:20px}
+.partner .mark{height:72px;display:flex;align-items:center}
+.partner .mark img{height:58px;width:auto;filter:brightness(0) invert(1);transition:filter .5s var(--ease)}
+.partner:hover .mark img,.partner:focus-visible .mark img{filter:none}
+.partner .mark .knvb-mask{display:block;height:72px;aspect-ratio:1554/2044;background:var(--ink);-webkit-mask:url(assets/knvb.svg) center/contain no-repeat;mask:url(assets/knvb.svg) center/contain no-repeat;transition:background .5s var(--ease)}
+.partner:hover .knvb-mask,.partner:focus-visible .knvb-mask{background:var(--accent)}
+.partner h3{font-weight:800;font-variation-settings:"wdth" 75;text-transform:uppercase;font-size:26px;line-height:1}
+.partner p{font-size:16px;color:var(--ink-2);margin-top:6px}
+
+/* ---------- Contact / footer ---------- */
+.contact{padding:var(--gap) var(--m) 0;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end}
+.contact h2{grid-column:1/8}
+.contact .side{grid-column:8/13}
+.contact .side p{margin-bottom:24px}
+.mail{font-weight:800;font-variation-settings:"wdth" 75;font-size:clamp(22px,2.2vw,32px);text-decoration:none;display:inline-block;position:relative}
+.mail::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:3px;background:var(--accent);transform-origin:left;transition:transform .4s var(--ease)}
+.mail:hover::after{transform:scaleX(.3)}
+.socials{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:28px;list-style:none}
+.socials a{text-decoration:none;font-size:17px;transition:color .2s}
+.socials a:hover{color:var(--accent)}
+footer{padding:var(--gap) var(--m) 28px;overflow:hidden}
+.goal{position:relative}
+.footer-name{font-size:clamp(70px,19.6vw,360px);white-space:nowrap;margin-left:-.03em;line-height:.8}
+.footer-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:32px;font-size:15px;color:var(--ink-2)}
+.footer-row a{text-decoration:none}
+.footer-row a:hover{color:var(--ink)}
+.kick{position:absolute;width:clamp(44px,6vw,90px);height:clamp(44px,6vw,90px);right:4%;top:-30%;cursor:pointer;border:0;background:none;padding:0}
+.kick svg{width:100%;height:100%}
+
+/* ---------- Reveal motion ---------- */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .9s var(--ease);transition-delay:calc(var(--i,0) * 80ms)}
+.rv.in{opacity:1;transform:none}
+.no-js .rv{opacity:1;transform:none}
+.img-rv{clip-path:inset(12% 0 0 0);transition:clip-path 1.2s var(--ease)}
+.img-rv.in{clip-path:inset(0 0 0 0)}
+.no-js .img-rv{clip-path:none}
+
+/* ---------- Phone ---------- */
+@media (max-width:860px){
+  body{font-size:17px}
+  .hero{grid-template-columns:1fr;grid-template-rows:auto auto;padding-top:84px;align-items:start}
+  .hero-photo{order:-1;height:56svh;margin-inline:calc(var(--m) * -1)}
+  .hero-photo img{object-position:50% 25%}
+  .hero-seven{font-size:46vw;top:auto;bottom:-6%;right:2%}
+  .hero-copy{padding:20px 0 120px}
+  .hero h1{font-size:23vw;margin-top:-12vw}
+  .hero .lead{margin-top:28px}
+  .hero-meta{bottom:28px;font-size:14px}
+  .statement,.honours-grid,.beyond-head,.months,.partners-grid,.contact{grid-template-columns:1fr}
+  .statement h2,.statement .lead,.statement figure,.honours h2,.caps,.trophies,.beyond-head h2,.beyond-head .lead,.partners h2,.partners .lead,.partner-list,.contact h2,.contact .side{grid-column:1/-1;grid-row:auto}
+  .statement figure{margin-top:32px}
+  .journey{height:calc(var(--stops) * 75vh + 100vh)}
+  .journey-stage{grid-template-columns:1fr;grid-template-rows:auto auto minmax(0,1fr);padding:76px var(--m) 20px;gap:10px}
+  .journey-head{grid-column:1;margin-bottom:0}
+  .journey-head p{display:none}
+  .pitch{height:auto;max-height:30svh}
+  .chapter{grid-template-rows:minmax(0,1fr) auto;gap:14px}
+  .chapter-text{min-height:0}
+  .chapter-text p{font-size:16px}
+  .caps{margin-bottom:40px}
+  .months{gap:56px}
+  .m1,.m2,.m3,.m4,.m5,.m6{grid-column:1/-1;margin-top:0}
+  .partner{grid-template-columns:1fr;min-height:0}
+  .partner figure{aspect-ratio:16/10}
+  .contact .side{margin-top:32px}
+  .kick{top:-60%}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv,.img-rv{opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important}
+  .led-track{transform:none!important}
+  .chapter-photo img,.chapter-text > *{transition:none}
+}
+</style>
+</head>
+<body class="no-js">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="ball" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="48" fill="#f3f0e9" stroke="#0b0b0c" stroke-width="3"/>
+      <polygon points="50,30 69,44 62,66 38,66 31,44" fill="#0b0b0c"/>
+      <g stroke="#0b0b0c" stroke-width="3" fill="none"><path d="M50 30V6M69 44l22-8M62 66l14 20M38 66 24 86M31 44 9 36"/></g>
+      <g fill="#0b0b0c"><path d="M40 3h20l-4 6H44z"/><path d="M93 30l4 18-6-2-2-12z"/><path d="M84 82 70 95l1-7 9-8z"/><path d="M16 82l14 13-1-7-9-8z"/><path d="M7 30 3 48l6-2 2-12z"/></g>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Xavi Simons, home">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 6h9l7 10 7-10h9L25 21l11 13h-9l-7-9-7 9H4l11-13z" fill="currentColor"/></svg>
+    Xavi Simons
+  </a>
+  <nav aria-label="Main">
+    <ul>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#honours">Honours</a></li>
+      <li><a href="#beyond">Beyond football</a></li>
+      <li><a href="#partners">Partners</a></li>
+    </ul>
+  </nav>
+  <a class="btn small" href="#contact">Contact</a>
+</header>
+<svg class="progress-ball" id="progressBall" aria-hidden="true"><use href="#ball"/></svg>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="h1">
+    <svg class="hero-pitch" id="heroPitch" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <rect x="40" y="60" width="1360" height="800"/>
+      <path d="M720 60V860"/>
+      <circle cx="720" cy="460" r="140"/>
+      <path d="M1400 250H1180V670H1400"/>
+      <path d="M1400 360H1320V560H1400"/>
+      <path d="M1180 380A100 100 0 0 0 1180 540"/>
+      <path d="M40 250H260V670H40"/>
+      <path d="M40 360H120V560H40"/>
+      <path d="M260 380A100 100 0 0 1 260 540"/>
+    </svg>
+    <div class="hero-copy">
+      <h1 class="display" id="h1"><span><i>Xavi</i></span><span><i>Simons</i></span></h1>
+      <p class="lead rv" style="--i:3">Attacking midfielder. Number 7 for Tottenham Hotspur and the Netherlands.</p>
+      <div class="hero-actions rv" style="--i:4">
+        <a class="btn" href="#journey">Follow the journey <svg class="ball" aria-hidden="true"><use href="#ball"/></svg></a>
+        <a class="text-link" href="#contact">Work with the team</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <span class="hero-seven display" aria-hidden="true">7</span>
+      <img id="heroImg" src="assets/p_4ddceb91.jpg" alt="Xavi Simons in the dark Tottenham Hotspur kit, holding a match ball" fetchpriority="high">
+    </div>
+    <div class="hero-meta" aria-hidden="true"><span>Amsterdam, 21.04.2003</span><span>London, now</span></div>
+  </section>
+
+  <!-- LED perimeter board: partners live where brands live in football -->
+  <div class="led" aria-label="Xavi Simons and partners">
+    <div class="led-track" id="ledTrack">
+      <div class="led-item">
+        <span>Xavi Simons</span><i class="dot"></i>
+        <img class="led-logo" src="assets/redbull.svg" alt="Red Bull"><i class="dot"></i>
+        <span>Trust the process</span><i class="dot"></i>
+        <img class="led-logo knvb" src="assets/knvb.svg" alt="KNVB"><i class="dot"></i>
+        <span>Nº 7</span><i class="dot"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATEMENT -->
+  <section class="statement" aria-labelledby="about-h">
+    <h2 class="display rv" id="about-h">Focused on the game</h2>
+    <p class="lead rv" style="--i:1">Built through dedication, resilience and ambition. A story about growth, embracing every challenge, and staying true to who I am at every stage of the journey.</p>
+    <figure class="img-rv"><img src="assets/p_b2acf896.jpg" alt="Xavi Simons seated in the gym between sessions" loading="lazy"></figure>
+  </section>
+
+  <!-- JOURNEY -->
+  <section class="journey" id="journey" aria-labelledby="journey-h" style="--stops:8">
+    <div class="journey-stage">
+      <div class="journey-head">
+        <h2 class="display" id="journey-h">The journey</h2>
+        <p>Amsterdam to London in eight passes. Scroll to play the move, or tap any player on the pitch.</p>
+      </div>
+
+      <svg class="pitch" id="pitch" viewBox="0 0 1000 640" role="group" aria-label="Career stops plotted as a passing move up the pitch">
+        <g aria-hidden="true">
+          <rect class="stripe" x="0" y="0" width="1000" height="640" fill="none"/>
+          <rect class="stripe" x="100" y="0" width="100" height="640"/>
+          <rect class="stripe" x="300" y="0" width="100" height="640"/>
+          <rect class="stripe" x="500" y="0" width="100" height="640"/>
+          <rect class="stripe" x="700" y="0" width="100" height="640"/>
+          <rect class="stripe" x="900" y="0" width="100" height="640"/>
+          <rect class="line" x="20" y="20" width="960" height="600"/>
+          <path class="line" d="M500 20V620"/>
+          <circle class="line" cx="500" cy="320" r="80"/>
+          <path class="line" d="M980 170H840V470H980M980 245H935V395H980"/>
+          <path class="line" d="M20 170H160V470H20M20 245H65V395H20"/>
+          <path class="line" d="M980 285h12v70h-12" />
+        </g>
+        <path class="pass" id="passAll" d=""/>
+        <path class="pass-done" id="passDone" d=""/>
+        <g id="stops"></g>
+        <use href="#ball" id="pitchBall" width="34" height="34" x="-17" y="-17"/>
+      </svg>
+
+      <div class="chapter">
+        <div class="chapter-photo" id="chapterPhoto"></div>
+        <div class="chapter-text" id="chapterText" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HONOURS -->
+  <section class="honours" id="honours" aria-labelledby="honours-h">
+    <div class="honours-grid">
+      <h2 class="display rv" id="honours-h">To be proud of</h2>
+      <div class="caps rv" style="--i:1">
+        <div class="num" aria-label="30 plus"><span id="capsNum">30</span><span>+</span></div>
+        <p>Caps for the Netherlands, and counting.</p>
+      </div>
+      <ol class="trophies">
+        <li class="rv" style="--i:1"><div><b>Ligue 1 Champion</b><small>Paris Saint-Germain</small></div><span>2021/22</span></li>
+        <li class="rv" style="--i:2"><div><b>KNVB Cup</b><small>PSV Eindhoven</small></div><span>2022/23</span></li>
+        <li class="rv" style="--i:3"><div><b>Eredivisie top scorer</b><small>PSV Eindhoven</small></div><span>2022/23</span></li>
+        <li class="rv" style="--i:4"><div><b>Johan Cruijff Talent of the Year</b><small>Eredivisie</small></div><span>PSV</span></li>
+        <li class="rv" style="--i:5"><div><b>DFL Supercup</b><small>RB Leipzig</small></div><span>2023</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- BEYOND -->
+  <section class="beyond" id="beyond" aria-labelledby="beyond-h">
+    <div class="beyond-head">
+      <h2 class="display rv" id="beyond-h">Beyond football</h2>
+      <p class="lead rv" style="--i:1">Family first, a city kid at heart, and one line that comes back every month: trust the process.</p>
+    </div>
+    <div class="months">
+      <article class="month m1 rv"><figure class="img-rv"><img src="assets/p_bd2dc662.jpg" alt="Xavi Simons as a child with his mother and sibling" loading="lazy"></figure><h3>New year. Same ambition.</h3><p>January</p></article>
+      <article class="month m2 rv" style="--i:1"><figure class="img-rv"><img src="assets/p_41c74fea.jpg" alt="Xavi Simons in the gym in front of a barbell rack" loading="lazy"></figure><h3>Keep building.</h3><p>February</p></article>
+      <article class="month m3 rv" style="--i:2"><figure class="img-rv"><img src="assets/p_30599417.jpg" alt="Silhouette of Xavi Simons by a lake in the mountains" loading="lazy"></figure><h3>Trust the process.</h3><p>March</p></article>
+      <article class="month m4 rv"><figure class="img-rv"><img src="assets/p_1688341c.jpg" alt="Xavi Simons training alone in a dim room" loading="lazy"></figure><h3>Football can change in a second. Mindset doesn't.</h3><p>April</p></article>
+      <article class="month m5 rv" style="--i:1"><figure class="img-rv"><img src="assets/p_addccbe3.jpg" alt="Xavi Simons with kids in Cruyff Foundation bibs at a Cruyff Court" loading="lazy"></figure><h3>The comeback starts, now.</h3><p>May · Cruyff Court</p></article>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="partners" id="partners" aria-labelledby="partners-h">
+    <div class="partners-grid">
+      <h2 class="display rv" id="partners-h">In good company</h2>
+      <p class="lead rv" style="--i:1">A short list, on purpose. Partners who were there for the work, not just the highlights.</p>
+      <div class="partner-list">
+        <a class="partner rv" href="https://www.redbull.com" target="_blank" rel="noopener" style="--i:1">
+          <figure><img src="assets/p_d61f940b.jpg" alt="Xavi Simons smiling in a Red Bull cap" loading="lazy"></figure>
+          <div class="body"><div class="mark"><img src="assets/redbull.svg" alt="Red Bull"></div><div><h3>Red Bull</h3><p>Trusted partner</p></div></div>
+        </a>
+        <a class="partner rv" href="https://www.knvb.nl" target="_blank" rel="noopener" style="--i:2">
+          <figure><img src="assets/p_4ea2356b.jpg" alt="Xavi Simons on the ball in the orange Netherlands shirt" loading="lazy"></figure>
+          <div class="body"><div class="mark"><span class="knvb-mask" role="img" aria-label="KNVB"></span></div><div><h3>KNVB · Oranje</h3><p>Trusted partner</p></div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact" aria-labelledby="contact-h">
+    <h2 class="display rv" id="contact-h">Let's connect</h2>
+    <div class="side rv" style="--i:1">
+      <p>Collaborations, media requests or a creative idea you want to explore together. The team reads every message and replies as soon as it can.</p>
+      <a class="mail" href="mailto:info@xavisimons.com?subject=Hello%20Team%20Xavi">info@xavisimons.com</a>
+      <ul class="socials">
+        <li><a href="https://instagram.com/xavisimons" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.tiktok.com/@xavisimons" target="_blank" rel="noopener">TikTok</a></li>
+        <li><a href="https://x.com/xavisimons" target="_blank" rel="noopener">X</a></li>
+        <li><a href="https://snapchat.com/xavisimons" target="_blank" rel="noopener">Snapchat</a></li>
+        <li><a href="https://www.facebook.com/xavisimons" target="_blank" rel="noopener">Facebook</a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="goal">
+    <button class="kick" id="kick" aria-label="Kick the ball"><svg aria-hidden="true"><use href="#ball"/></svg></button>
+    <p class="footer-name display" aria-hidden="true">Xavi Simons</p>
+  </div>
+  <div class="footer-row">
+    <span>© 2026 TTP. Trust the process.</span>
+    <span><a href="https://www.xavisimons.com/privacy-policy">Privacy policy</a> · <a href="https://www.xavisimons.com/terms-and-conditions">Terms &amp; conditions</a></span>
+  </div>
+</footer>
+
+<script>
+document.body.classList.remove('no-js');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- Reveal on enter ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), { rootMargin: '0px 0px -10% 0px' });
+document.querySelectorAll('.rv,.img-rv').forEach(el => io.observe(el));
+
+/* ---------- Hero intro: pitch chalk draws, name rises, 7 drops in ---------- */
+if (!reduce) {
+  document.querySelectorAll('#heroPitch > *').forEach((el, i) => {
+    const len = el.getTotalLength ? el.getTotalLength() : 1000;
+    el.style.strokeDasharray = len; el.style.strokeDashoffset = len;
+    el.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }], { duration: 1600, delay: 150 + i * 120, easing: 'cubic-bezier(.6,0,.2,1)', fill: 'forwards' });
+  });
+  document.querySelectorAll('.hero h1 i').forEach((el, i) =>
+    el.animate([{ transform: 'translateY(105%)' }, { transform: 'none' }], { duration: 1100, delay: 250 + i * 120, easing: 'cubic-bezier(.2,.7,.1,1)', fill: 'backwards' }));
+  document.querySelector('.hero-seven').animate(
+    [{ transform: 'translateY(-60%) rotate(-8deg)', opacity: 0 }, { transform: 'translateY(4%) rotate(0)', opacity: 1, offset: .7 }, { transform: 'none', opacity: 1 }],
+    { duration: 1300, delay: 600, easing: 'cubic-bezier(.3,.7,.2,1)', fill: 'backwards' });
+  document.getElementById('heroImg').animate([{ transform: 'scale(1.12)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }], { duration: 1800, easing: 'cubic-bezier(.2,.7,.1,1)', fill: 'backwards' });
+}
+
+/* ---------- LED board: duplicate to loop, speed follows scroll ---------- */
+const track = document.getElementById('ledTrack');
+const item = track.firstElementChild;
+for (let i = 0; i < 3; i++) { const c = item.cloneNode(true); c.setAttribute('aria-hidden', 'true'); c.querySelectorAll('img').forEach(im => im.alt = ''); track.appendChild(c); }
+let ledX = 0, ledV = 0;
+
+/* ---------- Journey: a passing move up the pitch ---------- */
+const stops = [
+  { x: 95,  y: 320, tag: 'AMS', when: '2003', title: 'Amsterdam', text: 'April 21, 2003. The beginning.', img: 'p_dac76a73.jpg', alt: 'Baby Xavi with his mother, wearing a Brazil shirt' },
+  { x: 215, y: 150, tag: 'ROJ', when: '2008 – 2010', title: 'Rojales, Spain', text: 'First steps at CD Thader, on the Costa Blanca.', img: 'p_1ba7d73c.jpg', alt: 'Young Xavi in a blue football shirt' },
+  { x: 330, y: 480, tag: 'BCN', when: '2010 – 2019', title: 'Barcelona', text: 'The La Masia years. Nine seasons learning the game the Barça way.', img: 'p_5375f706.jpg', alt: 'Young Xavi dribbling in a Barcelona shirt' },
+  { x: 450, y: 210, tag: 'PAR', when: '2019 – 2022', title: 'Paris', text: 'The Paris breakthrough, and a Ligue 1 title with PSG.', type: 'PSG' },
+  { x: 575, y: 440, tag: 'EIN', when: '2022 – 2023', title: 'Eindhoven', text: 'The PSV explosion: KNVB Cup, Eredivisie top scorer, Talent of the Year.', img: 'p_0aa3002f.jpg', alt: 'Xavi Simons celebrating in the red and white PSV shirt' },
+  { x: 690, y: 170, tag: 'LEI', when: '2023 – 2025', title: 'Leipzig', text: 'The Bundesliga rise with RB Leipzig, starting with the DFL Supercup.', img: 'p_c991be57.jpg', alt: 'Xavi Simons in the RB Leipzig shirt' },
+  { x: 800, y: 430, tag: 'NED', when: '2022 – now', title: 'Oranje', text: 'The Netherlands national team. More than 30 caps and counting.', img: 'p_4ea2356b.jpg', alt: 'Xavi Simons on the ball for the Netherlands' },
+  { x: 925, y: 320, tag: 'LDN', when: '2025 – now', title: 'London', text: 'The Premier League chapter. Number 7 at Tottenham Hotspur.', img: 'p_ad0cd56c.jpg', alt: 'Xavi Simons holding a Tottenham shirt with number 7 and his name' }
+];
+const svgNS = 'http://www.w3.org/2000/svg';
+let d = `M${stops[0].x} ${stops[0].y}`;
+for (let i = 1; i < stops.length; i++) {
+  const a = stops[i - 1], b = stops[i];
+  const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2 + (i % 2 ? -40 : 40);
+  d += ` Q${mx} ${my} ${b.x} ${b.y}`;
+}
+const passAll = document.getElementById('passAll'), passDone = document.getElementById('passDone'), ballEl = document.getElementById('pitchBall');
+passAll.setAttribute('d', d); passDone.setAttribute('d', d);
+const totalLen = passDone.getTotalLength();
+passDone.style.strokeDasharray = totalLen;
+// length along path at each stop
+const segLen = [0];
+{ let acc = 0; const tmp = document.createElementNS(svgNS, 'path');
+  for (let i = 1; i < stops.length; i++) {
+    const a = stops[i - 1], b = stops[i];
+    const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2 + (i % 2 ? -40 : 40);
+    tmp.setAttribute('d', `M${a.x} ${a.y} Q${mx} ${my} ${b.x} ${b.y}`);
+    acc += tmp.getTotalLength(); segLen.push(acc);
+  } }
+
+const gStops = document.getElementById('stops');
+const photo = document.getElementById('chapterPhoto');
+stops.forEach((s, i) => {
+  const g = document.createElementNS(svgNS, 'g');
+  g.setAttribute('class', 'stop'); g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button');
+  g.setAttribute('aria-label', `${s.title}, ${s.when}`);
+  g.innerHTML = `<circle class="p" cx="${s.x}" cy="${s.y}" r="16"/><text x="${s.x}" y="${s.y + (s.y > 320 ? 48 : -30)}" text-anchor="middle">${s.tag}</text>`;
+  const go = () => jumpTo(i);
+  g.addEventListener('click', go);
+  g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+  gStops.appendChild(g);
+  if (s.type) { const t = document.createElement('div'); t.className = 'typecard'; t.innerHTML = `<b>${s.type}</b>`; t.setAttribute('role', 'img'); t.setAttribute('aria-label', 'Paris Saint-Germain'); photo.appendChild(t); }
+  else { const im = new Image(); im.src = 'assets/' + s.img; im.alt = s.alt; im.loading = 'lazy'; photo.appendChild(im); }
+});
+const stopEls = [...gStops.children], photoEls = [...photo.children];
+const textEl = document.getElementById('chapterText');
+let active = -1;
+function setChapter(i) {
+  if (i === active) return;
+  active = i;
+  stopEls.forEach((el, k) => el.classList.toggle('on', k <= i));
+  photoEls.forEach((el, k) => el.classList.toggle('on', k === i));
+  const s = stops[i];
+  textEl.classList.add('swap');
+  setTimeout(() => {
+    textEl.innerHTML = `<div class="when">${s.when}</div><h3 class="display">${s.title}</h3><p>${s.text}</p>`;
+    requestAnimationFrame(() => textEl.classList.remove('swap'));
+  }, reduce ? 0 : 180);
+}
+const journey = document.getElementById('journey');
+function journeyProgress() {
+  const r = journey.getBoundingClientRect();
+  const span = journey.offsetHeight - innerHeight;
+  return Math.min(1, Math.max(0, -r.top / span));
+}
+function drawJourney() {
+  const p = journeyProgress();
+  const f = p * (stops.length - 1);               // 0..7
+  const i = Math.min(stops.length - 2, Math.floor(f));
+  const t = f - i;
+  // ball hold at each player, then a quick pass
+  const eased = t < .45 ? 0 : (t - .45) / .55;
+  const k = eased < .5 ? 2 * eased * eased : 1 - Math.pow(-2 * eased + 2, 2) / 2;
+  const L = segLen[i] + (segLen[i + 1] - segLen[i]) * (p >= 1 ? 1 : k);
+  const pt = passDone.getPointAtLength(L);
+  ballEl.setAttribute('transform', `translate(${pt.x} ${pt.y}) rotate(${L * 1.6})`);
+  passDone.style.strokeDashoffset = totalLen - L;
+  setChapter(p >= 1 ? stops.length - 1 : (k > .5 ? i + 1 : i));
+}
+function jumpTo(i) {
+  const span = journey.offsetHeight - innerHeight;
+  const y = journey.offsetTop + span * (i / (stops.length - 1)) + (i ? 2 : 0);
+  scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+}
+
+/* ---------- Caps counter ---------- */
+const capsEl = document.getElementById('capsNum');
+new IntersectionObserver((es, o) => es.forEach(e => {
+  if (!e.isIntersecting) return; o.disconnect();
+  if (reduce) return;
+  const t0 = performance.now();
+  const tick = now => { const p = Math.min(1, (now - t0) / 1400); capsEl.textContent = Math.round(30 * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+}), { threshold: .6 }).observe(capsEl);
+
+/* ---------- Scroll loop: nav, progress ball, hero drift, LED speed, journey ---------- */
+const nav = document.getElementById('nav'), pb = document.getElementById('progressBall'), heroImg = document.getElementById('heroImg');
+let lastY = scrollY;
+function frame() {
+  const y = scrollY, dy = y - lastY; lastY = y;
+  nav.classList.toggle('solid', y > 40);
+  nav.classList.toggle('hide', y > 600 && dy > 4);
+  if (dy < -4) nav.classList.remove('hide');
+  const max = document.documentElement.scrollHeight - innerHeight;
+  const p = max > 0 ? y / max : 0;
+  const x = p * (innerWidth - 22);
+  pb.style.transform = `translateX(${x}px) rotate(${x * 2.6}deg)`;
+  if (!reduce) {
+    if (y < innerHeight) heroImg.style.transform = `translateY(${y * .12}px) scale(${1 + y * .00012})`;
+    ledV += (Math.abs(dy) * .25 - ledV) * .08;
+    ledX -= .6 + ledV;
+    const w = item.offsetWidth + 56;
+    if (-ledX >= w) ledX += w;
+    track.style.transform = `translateX(${ledX}px)`;
+  }
+  drawJourney();
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+/* ---------- Footer: kick the ball across the name ---------- */
+document.getElementById('kick').addEventListener('click', e => {
+  const b = e.currentTarget; if (reduce) return;
+  const w = b.parentElement.offsetWidth;
+  b.animate([
+    { transform: 'translate(0,0) rotate(0)' },
+    { transform: `translate(${-w * .35}px,-120px) rotate(-360deg)`, offset: .35 },
+    { transform: `translate(${-w * .65}px,0) rotate(-720deg)`, offset: .6 },
+    { transform: `translate(${-w * .8}px,-50px) rotate(-900deg)`, offset: .78 },
+    { transform: `translate(${-w * .9}px,0) rotate(-1080deg)`, offset: .9 },
+    { transform: 'translate(0,0) rotate(-1440deg)' }
+  ], { duration: 2600, easing: 'cubic-bezier(.25,.6,.3,1)' });
+});
+</script>
+</body>
+</html>
